@@ -9,7 +9,7 @@
 }
 /* 各 SNS ボタンのボックス */
 .snsButtons li {
-  display: block;  /* 水平に並べる */
+  display: inline-block;;  /* 水平に並べる */
   list-style-type: none;  /* 先頭のポッチを消す */
   margin: 2px;
   padding: 6px 0px;
