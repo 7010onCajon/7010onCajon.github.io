@@ -42,6 +42,10 @@ FREE_WRITING_HTML = <<-'EOD'
       <span class="reviewer-role">若手 システムエンジニア</span></div></div></div></div>
       <hr class="context-break">
   EOD
+THANKS_HTML = <<-'EOD'
+  キャラクター画像: <a href="https://waifulabs.com/">WAIFU LABS</a> <br>
+  背景写真: Photo by Plush Design Studio on <a href="https://unsplash.com/">Unsplash</a>
+  EOD
 SHOPS = [
   { NAME: 'Kindle',          URL: 'https://www.amazon.co.jp/%E3%82%A2%E3%83%8A%E3%83%AD%E3%82%B0%E9%8D%B5%E3%81%AE%E5%A4%B1%E5%8A%B9%E3%83%AA%E3%82%B9%E3%83%88-Moral-over-Technology-E%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA-ebook/dp/B08FJGLTJ2/' },
 ]
@@ -225,7 +229,6 @@ iframe#tumblr_controls {
           </div>
         </div>
       </div>
-
       <div id="social" class="col-sm-pull-5 col-sm-7">
         <ul class="list-inline text-center social-bottuns">
           <li>
@@ -265,6 +268,7 @@ window.___gcfg = {lang: 'ja'};
           </li>
           -->
         </ul>
+
       </div>
     </div>
   </div>
@@ -465,6 +469,18 @@ window.___gcfg = {lang: 'ja'};
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<hr class="context-break">
+
+<section id="thanks">
+  <div class="container dd-container">
+    <h2 class="h4 section-title text-center">SPECIAL THANKS</h2>
+    <!--<p class="h1 text-center section-lead">この本を書いた人</p>-->
+    <div class="container dd-container text-center">
+      <%= THANKS_HTML %>
     </div>
   </div>
 </section>
