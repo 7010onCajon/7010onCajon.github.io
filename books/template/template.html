@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>7010onCajon ポートフォリオ</title>
+
+  <link rel="stylesheet" type="text/css" href="../../honoka/css/bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.png">
+  <style type="text/css">
+  .bs-component + .bs-component {
+    margin-top: 1rem;
+  }
+  @media (min-width: 768px) {
+    .bs-docs-section {
+      margin-top: 8em;
+    }
+    .bs-component {
+      position: relative;
+    }
+    .bs-component .modal {
+      position: relative;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      left: auto;
+      z-index: 1;
+      display: block;
+    }
+    .bs-component .modal-dialog {
+      width: 90%;
+    }
+    .bs-component .popover {
+      position: relative;
+      display: inline-block;
+      width: 220px;
+      margin: 20px;
+    }
+    .nav-tabs {
+      margin-bottom: 15px;
+    }
+    .progress {
+      margin-bottom: 10px;
+    }
+  }
+  </style>
+</head>
+<body>
+  <!-- Header
+  ================================================== -->
+  <div id="header-bottom">
+    <div class="rows">
+      <div class="container">
+
+        {block:IfHeaderColumnLayoutReverse}
+        <div id="cover-image-container" class="col-sm-5">
+
+          {/block:IfHeaderColumnLayoutReverse}
+          {block:IfNotHeaderColumnLayoutReverse}
+          <div id="cover-image-container" class="col-sm-push-7 col-sm-5">
+
+            {/block:IfNotHeaderColumnLayoutReverse}
+             <img id="cover-image" src="./cover.jpg" alt="" class="img-thumbnail">
+            <div class="visible-xs">
+
+              {block:IfBookCollectionTitle}
+              <p class="book-collection-title"><span class="book-collection-title-label">{text:BookCollectionTitle}</span></p>
+              {/block:IfBookCollectionTitle}
+              <p class="book-title">
+
+                {text:BookTitle}
+              </p>
+              {block:IfBookSubtitle}
+              <p class="book-subtitle">
+
+                {text:BookSubtitle}
+              </p>
+              {/block:IfBookSubtitle}
+              <hr class="context-break">
+              <ul class="list-inline creators-list">
+
+                {block:IfAuthorName01}
+                <li>{text:AuthorName 01}</li>
+                {/block:IfAuthorName01}
+                {block:IfAuthorName02}
+                <li>{text:AuthorName 02}</li>
+                {/block:IfAuthorName02}
+                {block:IfContributorName01}
+                <li>{text:ContributorName 01}</li>
+                {/block:IfContributorName01}
+                {block:IfContributorName02}
+                <li>{text:ContributorName 02}</li>
+                {/block:IfContributorName02}
+              </ul>
+              <div class="btn-container">
+                <ul class="list-inline">
+
+                  {block:IfPreviewEmbedCode}
+                  <li>
+                    <p><a href="#preview" class="btn btn-success btn-lg">試し読みする</a></p>
+                  </li>
+                  {/block:IfPreviewEmbedCode}
+                  {block:IfNotPreviewEmbedCode}
+                  {block:IfPreviewLink}
+                  <li>
+                    <p><a href="#preview" class="btn btn-success btn-lg">試し読みする</a></p>
+                  </li>
+                  {block:IfPreviewLink}
+                  {/block:IfNotPreviewEmbedCode}
+                  {block:IfShowSectionAcquisition}
+                  <li>
+                    <p><a href="#acquisition" class="btn btn-primary btn-lg">この本を入手</a></p>
+                  </li>{/block:IfShowSectionAcquisition}
+                  {block:IfNotShowSectionAcquisition}
+                  <li>
+                    <p class="sr-only">入手可能なリンクはありません</p>
+                  </li>{/block:IfNotShowSectionAcquisition}
+                </ul>
+              </div>
+            </div>
+            {block:IfNotHeaderColumnLayoutReverse}
+          </div>
+          {/block:IfNotHeaderColumnLayoutReverse}
+          {block:IfHeaderColumnLayoutReverse}
+        </div>
+        {/block:IfHeaderColumnLayoutReverse}
+
+        {block:IfHeaderColumnLayoutReverse}
+        <div id="social" class="col-sm-7">
+
+          {/block:IfHeaderColumnLayoutReverse}
+          {block:IfNotHeaderColumnLayoutReverse}
+          <div id="social" class="col-sm-pull-5 col-sm-7">
+
+            {/block:IfNotHeaderColumnLayoutReverse}
+            <ul class="list-inline text-center social-bottuns">
+              <li id="tweet-btn"><a href="https://twitter.com/share" data-url="{BlogURL}" class="twitter-share-button">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              </li>
+              <li id="fb-like-btn">
+                <div data-url="{BlogURL}" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-share="false" class="fb-like"></div>
+              </li>
+              <li id="hb-btn"><a href="https://b.hatena.ne.jp/entry/" data-hatena-bookmark-layout="standard-balloon" title="このエントリーをはてなブックマークに追加" class="hatena-bookmark-button"><img src="https://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a>
+                <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+              </li>
+              <li id="g-plusone-btn">
+                <div data-size="medium" class="g-plusone"></div>
+                <script type="text/javascript">
+                  window.___gcfg = {lang: 'ja'};
+                  (function() {
+                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                  po.src = 'https://apis.google.com/js/plusone.js';
+                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                  })();
+                </script>
+              </li>
+            </ul>
+            {block:IfNotHeaderColumnLayoutReverse}
+          </div>
+          {/block:IfNotHeaderColumnLayoutReverse}
+          {block:IfHeaderColumnLayoutReverse}
+        </div>
+        {/block:IfHeaderColumnLayoutReverse}
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Scripts
+  ================================================== -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="./honoka/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+  $('.bs-component [data-toggle="popover"]').popover();
+  $('.bs-component [data-toggle="tooltip"]').tooltip();
+  </script>
+</body>
+</html>
