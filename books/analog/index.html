@@ -43,16 +43,16 @@
 
 <style>
 a {
-  color: #f8b500;
+  color: #ffbb00;
 }
 a:hover, a:focus {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .bubble {
-  background: #f8b500;
+  background: #ffbb00;
 }
 .bubble:after {
-  border-color: #f8b500 transparent;
+  border-color: #ffbb00 transparent;
 }
 #header:before {
   background-image: url(./background.jpg);
@@ -60,39 +60,39 @@ a:hover, a:focus {
 #header #header-inner { }
 #catchprase-container-inner { }
 #header-bottom .creators-list > li {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .section-lead {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .section-inverse {
-  background: #f8b500;
+  background: #ffbb00;
 }
 .feature-image-placeholder {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .character-desc {
-  border-color: #f8b500;
+  border-color: #ffbb00;
 }
 .review-container .review-title {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .review-container .reviewer-icon-placeholder {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .review-container .reviewer-name {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .review-container .reviewer-name a:hover,
 .review-container .reviewer-name a:active {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .role {
-  background-color: #f8b500;
+  background-color: #ffbb00;
 }
 #bio a .fa-stack:hover,
 #bio a .fa-stack:focus {
-  color: #f8b500;
+  color: #ffbb00;
 }
 .separator-for-col-sm-3:before,
 .separator-for-col-sm-3:after {
@@ -121,6 +121,7 @@ iframe#tumblr_controls {
 <body>
 
 <div id="fb-root"></div>
+<!--
 <script>
 (function(d, s, id) {
  var js, fjs = d.getElementsByTagName(s)[0];
@@ -130,7 +131,7 @@ iframe#tumblr_controls {
  fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
-
+-->
 <header id="header">
   <h1 class="sr-only">アナログ鍵の失効リスト</h1>
   <div id="header-inner">
@@ -182,12 +183,27 @@ iframe#tumblr_controls {
 
       <div id="social" class="col-sm-pull-5 col-sm-7">
         <ul class="list-inline text-center social-bottuns">
+          <li>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </li>
+          <!--
           <li id="tweet-btn"><a href="https://twitter.com/share" data-url="https://7010oncajon.github.io/books/analog" class="twitter-share-button">Tweet</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </li>
+          -->
+          <li>
+            <iframe src="https://www.facebook.com/plugins/share_button.php?href=https://7010oncajon.github.io/books/analog&layout=button&size=small&width=69&height=20&appId" width="69" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+          </li>
+          <li>
+            <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="https://7010oncajon.github.io/books/analog" data-color="default" data-size="small" data-count="false" style="display: none;"></div>
+            <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+          </li>
+          <!--
           <li id="fb-like-btn">
           <div data-url="https://7010oncajon.github.io/books/analog" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-share="false" class="fb-like"></div>
           </li>
+          -->
+          <!--
           <li id="hb-btn"><a href="http://b.hatena.ne.jp/entry/" data-hatena-bookmark-layout="standard-balloon" title="このエントリーをはてなブックマークに追加" class="hatena-bookmark-button"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a>
           <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
           </li>
@@ -202,6 +218,7 @@ window.___gcfg = {lang: 'ja'};
  })();
           </script>
           </li>
+          -->
         </ul>
       </div>
     </div>
