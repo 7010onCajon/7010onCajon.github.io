@@ -1,4 +1,57 @@
-
+<%
+COLOR_PRIMARY = '#336b87'
+TWITTER = '@7010onCajon'
+TWITTER_URL = 'https://twitter.com/7010onCajon'
+URL = 'https://7010oncajon.github.io/books/analog'
+TITLE = '技術者たちの(ディ)スタンス'
+BACKGROUND_IMAGE = './background.jpg'
+SHORTCUT_ICON = '../../img/favicon.png'
+SHORTCUT_ICON_PRECOMPOSED = '../../img/favicon.png'
+BOOK_COLLECTION_TITLE = 'S&Eシリーズ'
+BOOK_TITLE = '技術者たちの(ディ)スタンス'
+CATCH1 = 'なぜ実装したのですか？'
+CATCH2 = <<-'EOD'
+  ――そして、彼の仕事のスタンスを聞けたこと。
+  何重にもプロテクトされている扉を開けることができた。<br>
+  <br>
+  「やっぱり先輩はシステムエンジニアですね」
+EOD
+COVER_IMAGE = './cover.jpg'
+AUTHOR = '7010onCajon'
+AUTHOR_YOMI = 'ナオト・オン・カホン'
+AUTHOR_IMAGE = '../../img/7010onCajon.jpg'
+AUTHOR_URL = 'https://7010oncajon.github.io/'
+AUTHOR_DESCRIPTION = '本業は物書き。副業はJazzドラマー。趣味でピアノを弾きます。それと生活費を稼ぐためにエンジニアをしています。 '
+DESCRIPTION = '咲舞と伊吹が繰り広げるシステムエンジニアの日常を描く連作短編（第一作）'
+DESCRIPTION_HTML = <<-'EOD'
+  勘違いでITイベントに参加することになった咲舞。そこにゲスト参加していた天才プログラマ・逢坂との邂逅を通して、エンジニアとしての学びと伊吹の想いを知る。<br><br>
+  ――スキル・経験は確かだけど変わり者のエンジニアの伊吹創介。名家のお嬢様だけど新人エンジニアとして働く西蓮寺咲舞。そんな二人が繰り広げるシステムエンジニアの日常を描く連作短編（第一作）
+  EOD
+PUBLISH_DATE = '2020/08'
+PUBLISHER = '自主出版'
+PRICE_YEN = '250'
+ISBN = '(なし)'
+FREE_WRITING_HTML = <<-'EOD'
+  <div class="review-container">
+    <p class="review-title">若手SE必読の書</p>
+    <div class="bubble"><blockquote>
+      本書は会社の新人研修で読ませた方がよい。いや読ませるべきである。
+      <footer></footer>
+    </blockquote></div>
+    <div class="media reviewer-container"><div class="pull-left"><img style="width: 48px;" src="char02.png" alt="" class="media-object img-circle">
+    </div>
+    <div class="media-body"><div class="reviewer-name">S氏
+      <span class="reviewer-role">若手 システムエンジニア</span></div></div></div></div>
+      <hr class="context-break">
+  EOD
+THANKS_HTML = <<-'EOD'
+  キャラクター画像: <a href="https://waifulabs.com/">WAIFU LABS</a> <br>
+  背景写真: Photo by Luca Bravo on <a href="https://unsplash.com/">Unsplash</a>
+  EOD
+SHOPS = [
+  { NAME: 'Kindle',          URL: 'https://www.amazon.co.jp/gp/product/B08FJHLLBC/ref=dbs_a_def_rwt_bibl_vppi_i1' },
+]
+%>
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 <head>
@@ -12,87 +65,87 @@
     -->
 <meta charset="utf-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" /><![endif]-->
-<title>技術者たちの(ディ)スタンス | 7010onCajon</title>
+<title><%= TITLE %> | <%= AUTHOR %></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="description" content="咲舞と伊吹が繰り広げるシステムエンジニアの日常を描く連作短編（第一作）">
+<meta name="description" content="<%= DESCRIPTION %>">
 
 <!-- OGP -->
-<meta property="og:title" content="技術者たちの(ディ)スタンス - 7010onCajon ">
+<meta property="og:title" content="<%= TITLE %> - <%= AUTHOR %> ">
 <meta property="og:type" content="website">
-<meta property="og:image" content="./cover.jpg">
-<meta property="og:site_name" content="技術者たちの(ディ)スタンス | 7010onCajon">
-<meta property="og:description" content="咲舞と伊吹が繰り広げるシステムエンジニアの日常を描く連作短編（第一作）">
-<meta property="og:url" content="https://7010oncajon.github.io/books/analog">
+<meta property="og:image" content="<%= COVER_IMAGE %>">
+<meta property="og:site_name" content="<%= TITLE %> | <%= AUTHOR %>">
+<meta property="og:description" content="<%= DESCRIPTION %>">
+<meta property="og:url" content="<%= URL %>">
 
 <!-- TwitterCard -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@7010onCajon">
-<meta name="twitter:creator" content="@7010onCajon">
+<meta name="twitter:site" content="<%= TWITTER %>">
+<meta name="twitter:creator" content="<%= TWITTER %>">
 
 <style>figure{margin:0}</style>
 
-<link rel="shortcut icon" href="../../img/favicon.png">
-<link rel="apple-touch-icon-precomposed" href="../../img/favicon.png">
+<link rel="shortcut icon" href="<%= SHORTCUT_ICON %>">
+<link rel="apple-touch-icon-precomposed" href="<%= SHORTCUT_ICON_PRECOMPOSED %>">
 <link rel="stylesheet" media="screen" href="../css/styles.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel="canonical" href="https://7010oncajon.github.io/books/analog">
+<link rel="canonical" href="<%= URL %>">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <style>
 a {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 a:hover, a:focus {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .bubble {
-  background: #336b87;
+  background: <%= COLOR_PRIMARY %>;
 }
 .bubble:after {
-  border-color: #336b87 transparent;
+  border-color: <%= COLOR_PRIMARY %> transparent;
 }
 #header:before {
-  background-image: url(./background.jpg);
+  background-image: url(<%= BACKGROUND_IMAGE %>);
 }
 #header #header-inner { }
 #catchprase-container-inner { }
 #header-bottom .creators-list > li {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .section-lead {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .section-inverse {
-  background: #336b87;
+  background: <%= COLOR_PRIMARY %>;
 }
 .feature-image-placeholder {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .character-desc {
-  border-color: #336b87;
+  border-color: <%= COLOR_PRIMARY %>;
 }
 .review-container .review-title {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .review-container .reviewer-icon-placeholder {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .review-container .reviewer-name {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .review-container .reviewer-name a:hover,
 .review-container .reviewer-name a:active {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .role {
-  background-color: #336b87;
+  background-color: <%= COLOR_PRIMARY %>;
 }
 #bio a .fa-stack:hover,
 #bio a .fa-stack:focus {
-  color: #336b87;
+  color: <%= COLOR_PRIMARY %>;
 }
 .separator-for-col-sm-3:before,
 .separator-for-col-sm-3:after {
@@ -116,7 +169,7 @@ iframe#tumblr_controls {
 }
 </style>
 <link rel="stylesheet" type="text/css" href="https://assets.tumblr.com/fonts/gibson/stylesheet.css?v=3">
-<link rel="canonical" href="https://7010oncajon.github.io/books/analog" />
+<link rel="canonical" href="<%= URL %>" />
 </head>
 <body>
 
@@ -133,23 +186,19 @@ iframe#tumblr_controls {
 </script>
 -->
 <header id="header">
-  <h1 class="sr-only">技術者たちの(ディ)スタンス</h1>
+  <h1 class="sr-only"><%= TITLE %></h1>
   <div id="header-inner">
     <div class="container">
       <div class="rows">
         <div id="catchprase-container" class="col-sm-7">
           <div id="catchprase-container-inner">
-            <p class="catchprase">なぜ実装したのですか？</p>
-            <p class="subphrase hidden-xs">  ――そして、彼の仕事のスタンスを聞けたこと。
-  何重にもプロテクトされている扉を開けることができた。<br>
-  <br>
-  「やっぱり先輩はシステムエンジニアですね」
-</p>
+            <p class="catchprase"><%= CATCH1 %></p>
+            <p class="subphrase hidden-xs"><%= CATCH2 %></p>
             <hr>
             <div class="hidden-xs">
-              <p class="book-collection-title"><span class="book-collection-title-label">S&Eシリーズ</span></p>
-              <p class="book-title">技術者たちの(ディ)スタンス</p>
-              <ul class="list-inline creators-list"><li>7010onCajon</li></ul>
+              <p class="book-collection-title"><span class="book-collection-title-label"><%= BOOK_COLLECTION_TITLE %></span></p>
+              <p class="book-title"><%= BOOK_TITLE %></p>
+              <ul class="list-inline creators-list"><li><%= AUTHOR %></li></ul>
             </div>
             <div class="btn-container hidden-xs">
               <ul class="list-inline">
@@ -167,13 +216,13 @@ iframe#tumblr_controls {
   <div class="rows">
     <div class="container">
       <div id="cover-image-container" class="col-sm-push-7 col-sm-5">
-        <img id="cover-image" src="./cover.jpg" alt="" class="img-thumbnail">
+        <img id="cover-image" src="<%= COVER_IMAGE %>" alt="" class="img-thumbnail">
         <div class="visible-xs">
-          <p class="book-collection-title"><span class="book-collection-title-label">S&Eシリーズ</span></p>
-          <p class="book-title">技術者たちの(ディ)スタンス</p>
+          <p class="book-collection-title"><span class="book-collection-title-label"><%= BOOK_COLLECTION_TITLE %></span></p>
+          <p class="book-title"><%= BOOK_TITLE %></p>
           <hr class="context-break">
           <ul class="list-inline creators-list">
-            <li>7010onCajon</li>
+            <li><%= AUTHOR %></li>
           </ul>
           <div class="btn-container">
             <ul class="list-inline">
@@ -188,20 +237,20 @@ iframe#tumblr_controls {
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           </li>
           <!--
-          <li id="tweet-btn"><a href="https://twitter.com/share" data-url="https://7010oncajon.github.io/books/analog" class="twitter-share-button">Tweet</a>
+          <li id="tweet-btn"><a href="https://twitter.com/share" data-url="<%= URL %>" class="twitter-share-button">Tweet</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </li>
           -->
           <li>
-            <iframe src="https://www.facebook.com/plugins/share_button.php?href=https://7010oncajon.github.io/books/analog&layout=button&size=small&width=69&height=20&appId" width="69" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+            <iframe src="https://www.facebook.com/plugins/share_button.php?href=<%= URL %>&layout=button&size=small&width=69&height=20&appId" width="69" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
           </li>
           <li>
-            <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="https://7010oncajon.github.io/books/analog" data-color="default" data-size="small" data-count="false" style="display: none;"></div>
+            <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="<%= URL %>" data-color="default" data-size="small" data-count="false" style="display: none;"></div>
             <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
           </li>
           <!--
           <li id="fb-like-btn">
-          <div data-url="https://7010oncajon.github.io/books/analog" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-share="false" class="fb-like"></div>
+          <div data-url="<%= URL %>" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-share="false" class="fb-like"></div>
           </li>
           -->
           <!--
@@ -231,9 +280,7 @@ window.___gcfg = {lang: 'ja'};
   <div class="container dd-container">
     <h2 class="section-title text-center">STORY</h2>
     <p class="section-lead text-center">ストーリー</p>
-    <div class="description-body">  勘違いでITイベントに参加することになった咲舞。そこにゲスト参加していた天才プログラマ・逢坂との邂逅を通して、エンジニアとしての学びと伊吹の想いを知る。<br><br>
-  ――スキル・経験は確かだけど変わり者のエンジニアの伊吹創介。名家のお嬢様だけど新人エンジニアとして働く西蓮寺咲舞。そんな二人が繰り広げるシステムエンジニアの日常を描く連作短編（第一作）
-</div>
+    <div class="description-body"><%= DESCRIPTION_HTML %></div>
   </div>
 </section>
 
@@ -290,39 +337,39 @@ window.___gcfg = {lang: 'ja'};
     <table class="table table-condenced">
       <tr>
         <th>タイトル</th>
-        <td>S&Eシリーズ<br>技術者たちの(ディ)スタンス</td>
+        <td><%= BOOK_COLLECTION_TITLE %><br><%= BOOK_TITLE %></td>
       </tr>
 
       <tr>
         <th>著者</th>
         <td>
           <ul class="list-unstyled">
-            <li>7010onCajon</li>
+            <li><%= AUTHOR %></li>
           </ul>
         </td>
       </tr>
 
       <tr>
         <th>発行日</th>
-        <td>2020/08</td>
+        <td><%= PUBLISH_DATE %></td>
       </tr>
 
       <tr>
         <th>発行者</th>
-        <td>自主出版</td>
+        <td><%= PUBLISHER %></td>
       </tr>
 
       <tr>
         <th>販売価格</th>
         <td>
-          <p>250円</p>
+          <p><%= PRICE_YEN %>円</p>
           <p><a href="#acquisition" class="btn btn-default btn-sm">この本を入手</a></p>
         </td>
       </tr>
 
       <tr>
         <th>ISBN</th>
-        <td>(なし)</td>
+        <td><%= ISBN %></td>
       </tr>
 
     </table>
@@ -333,18 +380,7 @@ window.___gcfg = {lang: 'ja'};
   <div class="container review-container">
     <h2 class="h4 section-title text-center">REVIEWS</h2>
     <p class="h1 text-center section-lead">読者の声</p>
-    <div class="free-writing-body-container">  <div class="review-container">
-    <p class="review-title">若手SE必読の書</p>
-    <div class="bubble"><blockquote>
-      本書は会社の新人研修で読ませた方がよい。いや読ませるべきである。
-      <footer></footer>
-    </blockquote></div>
-    <div class="media reviewer-container"><div class="pull-left"><img style="width: 48px;" src="char02.png" alt="" class="media-object img-circle">
-    </div>
-    <div class="media-body"><div class="reviewer-name">S氏
-      <span class="reviewer-role">若手 システムエンジニア</span></div></div></div></div>
-      <hr class="context-break">
-</div>
+    <div class="free-writing-body-container"><%= FREE_WRITING_HTML %></div>
   </div>
 </section>
 
@@ -352,13 +388,13 @@ window.___gcfg = {lang: 'ja'};
   <div class="container dd-container">
     <h2 class="h4 section-title text-center">BUY NOW</h2>
     <p class="h1 text-center section-lead">ご購入はこちらから</p>
-    <p class="text-center">販売価格<span class="price">250</span>円 </p>
+    <p class="text-center">販売価格<span class="price"><%= PRICE_YEN %></span>円 </p>
     <p class="text-center small">価格はストアのセールやキャンペーンなどによって変動する場合があります。</p>
     <hr>
     <ul class="list-inline text-center">
-      
-        <li><p><a href="https://www.amazon.co.jp/gp/product/B08FJHLLBC/ref=dbs_a_def_rwt_bibl_vppi_i1" class="btn btn-primary btn-lg">Kindle</a></p></li>
-      
+      <% SHOPS.each do |shop| %>
+        <li><p><a href="<%= shop[:URL] %>" class="btn btn-primary btn-lg"><%= shop[:NAME] %></a></p></li>
+      <% end %>
     </ul>
   </div>
 </section>
@@ -420,18 +456,18 @@ window.___gcfg = {lang: 'ja'};
       <div class="panel-body">
         <ul class="media-list">
           <li class="media">
-          <div style="margin-right: 20px;" class="pull-left"><img style="width: 64px;" src="../../img/7010onCajon.jpg" alt="" class="media-object img-circle"></div>
+          <div style="margin-right: 20px;" class="pull-left"><img style="width: 64px;" src="<%= AUTHOR_IMAGE %>" alt="" class="media-object img-circle"></div>
           <div class="media-body">
             <div class="media-heading">
               <span class="role">著者</span>
-              7010onCajon
-              <small>ナオト・オン・カホン</small>
+              <%= AUTHOR %>
+              <small><%= AUTHOR_YOMI %></small>
             </div>
             <ul class="list-inline">
-              <li><a href="https://7010oncajon.github.io/" title="Web site"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-home fa-stack-1x fa-inverse"></i></span></a></li>
-              <li><a href="https://twitter.com/7010onCajon" title="Twitter"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></li>
+              <li><a href="<%= AUTHOR_URL %>" title="Web site"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-home fa-stack-1x fa-inverse"></i></span></a></li>
+              <li><a href="<%= TWITTER_URL %>" title="Twitter"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></li>
             </ul>
-            <div class="author-description">本業は物書き。副業はJazzドラマー。趣味でピアノを弾きます。それと生活費を稼ぐためにエンジニアをしています。 </div>
+            <div class="author-description"><%= AUTHOR_DESCRIPTION %></div>
           </div>
           </li>
         </ul>
@@ -447,9 +483,7 @@ window.___gcfg = {lang: 'ja'};
     <h2 class="h4 section-title text-center">SPECIAL THANKS</h2>
     <!--<p class="h1 text-center section-lead">この本を書いた人</p>-->
     <div class="container dd-container text-center">
-        キャラクター画像: <a href="https://waifulabs.com/">WAIFU LABS</a> <br>
-  背景写真: Photo by Luca Bravo on <a href="https://unsplash.com/">Unsplash</a>
-
+      <%= THANKS_HTML %>
     </div>
   </div>
 </section>
@@ -460,23 +494,23 @@ window.___gcfg = {lang: 'ja'};
 {
       "@context": "http://schema.org",
       "@type": "Book",
-      "isbn": "(なし)",
+      "isbn": "<%= ISBN %>",
       "bookFormat": "http://schema.org/EBook",
       "inLanguage": "ja",
-      "datePublished": "2020/08",
-      "publisher": {"name": "自主出版"},
+      "datePublished": "<%= PUBLISH_DATE %>",
+      "publisher": {"name": "<%= PUBLISHER %>"},
       "author": [
         {
-        "name": "7010onCajon",
-        "description": "本業は物書き。副業はJazzドラマー。趣味でピアノを弾きます。それと生活費を稼ぐためにエンジニアをしています。 ",
-        "image": "../../img/7010onCajon.jpg",
-        "url": "https://7010oncajon.github.io/"
+        "name": "<%= AUTHOR %>",
+        "description": "<%= AUTHOR_DESCRIPTION %>",
+        "image": "<%= AUTHOR_IMAGE %>",
+        "url": "<%= AUTHOR_URL %>"
         }
       ],
-      "url": "https://7010oncajon.github.io/books/analog",
-      "image": "./cover.jpg",
-      "description": "咲舞と伊吹が繰り広げるシステムエンジニアの日常を描く連作短編（第一作）",
-      "name": "技術者たちの(ディ)スタンス"
+      "url": "<%= URL %>",
+      "image": "<%= COVER_IMAGE %>",
+      "description": "<%= DESCRIPTION %>",
+      "name": "<%= TITLE %>"
       }
 </script>
 
