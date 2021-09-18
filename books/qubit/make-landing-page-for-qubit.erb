@@ -1,0 +1,548 @@
+<%
+COLOR_PRIMARY = '#694F94'
+TWITTER = '@7010onCajon'
+TWITTER_URL = 'https://twitter.com/7010onCajon'
+URL = 'https://7010oncajon.github.io/books/qubit'
+TITLE = '少しだけ不自由な私たちの殻'
+BACKGROUND_IMAGE = './background.jpg'
+SHORTCUT_ICON = '../../img/favicon.png'
+SHORTCUT_ICON_PRECOMPOSED = '../../img/favicon.png'
+BOOK_COLLECTION_TITLE = 'Story of Nagi'
+BOOK_TITLE = '少しだけ不自由な私たちの殻'
+CATCH1 = 'なぜ私たちは人間と同じ殻を与えられたのか？'
+CATCH2 = <<-'EOD'
+「私の予想が正しければ――このオペレーションはロビィにとっても辛い結果になると思う」</br>
+「どういうことでしょうか？」</br>
+</br>
+「気にしないで――私の直感に基づく漠然とした予感だから」</br>
+EOD
+COVER_IMAGE = './cover.jpg'
+AUTHOR = '7010onCajon'
+AUTHOR_YOMI = 'ナオト・オン・カホン'
+AUTHOR_IMAGE = '../../img/7010onCajon.jpg'
+AUTHOR_URL = 'https://7010oncajon.github.io/'
+AUTHOR_DESCRIPTION = '本業は物書き。副業はJazzドラマー。趣味でピアノを弾きます。それと生活費を稼ぐためにエンジニアをしています。 '
+DESCRIPTION = 'シンギュラリティを目前に控えた今こそ読みたい、そう遠くない未来の物語。'
+DESCRIPTION_HTML = <<-'EOD'
+オートマトン・アルマ。それは自我を持った機械人形。</br>
+人間との差はほとんどない彼らが引き起こす哀しいトラブルに、内務省・特務調査課のナギが立ち向かう。</br>
+日本の古典文学を題材にした４つの連作短編が人間性とは何かを問いかける。</br>
+</br>
+シンギュラリティを目前に控えた今こそ読みたい、そう遠くない未来の物語。</br>
+</br>
+***</br>
+</br>
+作品をイメージした音楽プレイリスト付き。</br>
+作中の[Music: 曲名](YouTubeのURL)が該当の音楽です。</br>
+読書とともにお楽しみください。
+  EOD
+PUBLISH_DATE = '2021/09'
+PUBLISHER = '自主出版'
+PRICE_YEN = '350'
+ISBN = '(なし)'
+FREE_WRITING_HTML = <<-'EOD'
+<!--
+  <div class="review-container">
+    <p class="review-title">全体を通してテンポ良く読める</p>
+    <div class="bubble"><blockquote>
+      自分を新しい世界に引っ張り上げる存在は人生において重要なものであると再確認をしました。<br>
+      この物語の主人公は変化に身を投じながらも自分の芯となる部分を常に持ち続けられる人だからこのような展開になるのかと感じました。自分もそうでありたい笑<br>
+      <br>
+      各話に著者の選んだ曲が並べられているのも情景がイメージしやすく面白かったです。挿絵がありなら挿入曲も許されますよね。
+      <footer></footer>
+    </blockquote></div>
+    <div class="media reviewer-container"><div class="pull-left"><img style="width: 48px;" src="char02.png" alt="" class="media-object img-circle">
+    </div>
+    <div class="media-body"><div class="reviewer-name"><a href="https://note.com/onunununu">おぬりー</a>
+      <span class="reviewer-role">ドラマー</span></div></div></div></div>
+      <hr class="context-break">
+-->
+  EOD
+THANKS_HTML = <<-'EOD'
+  キャラクター画像: <a href="https://waifulabs.com/">WAIFU LABS</a> <br>
+  背景写真: Photo by fabio on <a href="https://unsplash.com/">Unsplash</a>
+  EOD
+SHOPS = [
+  { NAME: 'Kindle',          URL: 'https://www.amazon.co.jp/dp/B09G1656BF/ref=cm_sw_em_r_mt_dp_07M6PYR1RMP8D3VGB7M8' },
+]
+%>
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<!--
+    Theme Narrative Huge(Den-Den Landing Page)
+    version: 1.0.22
+    by @lost_and_found from Densho Channel
+    mail: <info@denshochan.com>
+    Copyright (c) 2014 Densho Channel <http://densho.hatenablog.com/>
+    license: MIT
+    -->
+<meta charset="utf-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" /><![endif]-->
+<title><%= TITLE %> | <%= AUTHOR %></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="<%= DESCRIPTION %>">
+
+<!-- OGP -->
+<meta property="og:title" content="<%= TITLE %> - <%= AUTHOR %> ">
+<meta property="og:type" content="website">
+<meta property="og:image" content="<%= COVER_IMAGE %>">
+<meta property="og:site_name" content="<%= TITLE %> | <%= AUTHOR %>">
+<meta property="og:description" content="<%= DESCRIPTION %>">
+<meta property="og:url" content="<%= URL %>">
+
+<!-- TwitterCard -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="<%= TWITTER %>">
+<meta name="twitter:creator" content="<%= TWITTER %>">
+
+<style>figure{margin:0}</style>
+
+<link rel="shortcut icon" href="<%= SHORTCUT_ICON %>">
+<link rel="apple-touch-icon-precomposed" href="<%= SHORTCUT_ICON_PRECOMPOSED %>">
+<link rel="stylesheet" media="screen" href="../css/styles.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<link rel="canonical" href="<%= URL %>">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<style>
+a {
+  color: <%= COLOR_PRIMARY %>;
+}
+a:hover, a:focus {
+  color: <%= COLOR_PRIMARY %>;
+}
+.bubble {
+  background: <%= COLOR_PRIMARY %>;
+}
+.bubble:after {
+  border-color: <%= COLOR_PRIMARY %> transparent;
+}
+#header:before {
+  background-image: url(<%= BACKGROUND_IMAGE %>);
+}
+#header #header-inner { }
+#catchprase-container-inner { }
+#header-bottom .creators-list > li {
+  color: <%= COLOR_PRIMARY %>;
+}
+.section-lead {
+  color: <%= COLOR_PRIMARY %>;
+}
+.section-inverse {
+  background: <%= COLOR_PRIMARY %>;
+}
+.feature-image-placeholder {
+  color: <%= COLOR_PRIMARY %>;
+}
+.character-desc {
+  border-color: <%= COLOR_PRIMARY %>;
+}
+.review-container .review-title {
+  color: <%= COLOR_PRIMARY %>;
+}
+.review-container .reviewer-icon-placeholder {
+  color: <%= COLOR_PRIMARY %>;
+}
+.review-container .reviewer-name {
+  color: <%= COLOR_PRIMARY %>;
+}
+.review-container .reviewer-name a:hover,
+.review-container .reviewer-name a:active {
+  color: <%= COLOR_PRIMARY %>;
+}
+.role {
+  background-color: <%= COLOR_PRIMARY %>;
+}
+#bio a .fa-stack:hover,
+#bio a .fa-stack:focus {
+  color: <%= COLOR_PRIMARY %>;
+}
+.separator-for-col-sm-3:before,
+.separator-for-col-sm-3:after {
+  content: " ";
+  display: table;
+}
+.works-separator-for-col-sm-6:after {
+  clear: both;
+}
+.works-separator-for-col-sm-6:before,
+.works-separator-for-col-sm-6:after {
+  content: " ";
+  display: table;
+}
+.works-separator-for-col-sm-6:after {
+  clear: both;
+}
+
+iframe#tumblr_controls {
+  display:none;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="https://assets.tumblr.com/fonts/gibson/stylesheet.css?v=3">
+<link rel="canonical" href="<%= URL %>" />
+</head>
+<body>
+
+<div id="fb-root"></div>
+<!--
+<script>
+(function(d, s, id) {
+ var js, fjs = d.getElementsByTagName(s)[0];
+ if (d.getElementById(id)) return;
+ js = d.createElement(s); js.id = id;
+ js.src = "http://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
+ fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+-->
+<header id="header">
+  <h1 class="sr-only"><%= TITLE %></h1>
+  <div id="header-inner">
+    <div class="container">
+      <div class="rows">
+        <div id="catchprase-container" class="col-sm-7">
+          <div id="catchprase-container-inner">
+            <p class="catchprase"><%= CATCH1 %></p>
+            <p class="subphrase hidden-xs"><%= CATCH2 %></p>
+            <hr>
+            <div class="hidden-xs">
+              <p class="book-collection-title"><span class="book-collection-title-label"><%= BOOK_COLLECTION_TITLE %></span></p>
+              <p class="book-title"><%= BOOK_TITLE %></p>
+              <ul class="list-inline creators-list"><li><%= AUTHOR %></li></ul>
+            </div>
+            <div class="btn-container hidden-xs">
+              <ul class="list-inline">
+                <li><p><a href="#acquisition" class="btn btn-default btn-lg">この本を入手</a></p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="header-bottom">
+  <div class="rows">
+    <div class="container">
+      <div id="cover-image-container" class="col-sm-push-7 col-sm-5">
+        <img id="cover-image" src="<%= COVER_IMAGE %>" alt="" class="img-thumbnail">
+        <div class="visible-xs">
+          <p class="book-collection-title"><span class="book-collection-title-label"><%= BOOK_COLLECTION_TITLE %></span></p>
+          <p class="book-title"><%= BOOK_TITLE %></p>
+          <hr class="context-break">
+          <ul class="list-inline creators-list">
+            <li><%= AUTHOR %></li>
+          </ul>
+          <div class="btn-container">
+            <ul class="list-inline">
+              <li><p><a href="#acquisition" class="btn btn-primary btn-lg">この本を入手</a></p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="social" class="col-sm-pull-5 col-sm-7">
+        <ul class="list-inline text-center social-bottuns">
+          <li>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </li>
+          <!--
+          <li id="tweet-btn"><a href="https://twitter.com/share" data-url="<%= URL %>" class="twitter-share-button">Tweet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </li>
+          -->
+          <li>
+            <iframe src="https://www.facebook.com/plugins/share_button.php?href=<%= URL %>&layout=button&size=small&width=69&height=20&appId" width="69" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+          </li>
+          <li>
+            <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" data-url="<%= URL %>" data-color="default" data-size="small" data-count="false" style="display: none;"></div>
+            <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+          </li>
+          <!--
+          <li id="fb-like-btn">
+          <div data-url="<%= URL %>" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-share="false" class="fb-like"></div>
+          </li>
+          -->
+          <!--
+          <li id="hb-btn"><a href="http://b.hatena.ne.jp/entry/" data-hatena-bookmark-layout="standard-balloon" title="このエントリーをはてなブックマークに追加" class="hatena-bookmark-button"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a>
+          <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+          </li>
+          <li id="g-plusone-btn">
+          <div data-size="medium" class="g-plusone"></div>
+          <script type="text/javascript">
+window.___gcfg = {lang: 'ja'};
+(function() {
+ var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+ po.src = 'https://apis.google.com/js/plusone.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ })();
+          </script>
+          </li>
+          -->
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="description" class="section-inverse">
+  <div class="container dd-container">
+    <h2 class="section-title text-center">STORY</h2>
+    <p class="section-lead text-center">ストーリー</p>
+    <div class="description-body"><%= DESCRIPTION_HTML %></div>
+  </div>
+</section>
+
+<section id="characters">
+  <div class="container dd-container">
+    <h2 class="h4 section-title text-center">CHARACTERS</h2>
+    <p class="h1 text-center section-lead">キャラクター</p>
+    <div class="row">
+      <div class="character-container col-sm-3 container center-block text-center">
+        <img style="width: 128px;" src="char01.png" alt="" class="img-thumbnail">
+        <div class="h5 character-name">ナギ・アイサカ</div>
+        <div class="character-desc">
+          内務省・特務調査課 上級調査官
+        </div>
+      </div>
+      <div class="character-container col-sm-3 container center-block text-center">
+        <img style="width: 128px;" src="char02.png" alt="" class="img-thumbnail">
+        <div class="h5 character-name">ケンモチ</div>
+        <div class="character-desc">
+          内務省・特務調査課 課長
+        </div>
+      </div>
+      <div class="separator-for-col-sm-6"></div>
+      <div class="character-container col-sm-3 container center-block text-center">
+        <img style="width: 128px;" src="char03.png" alt="" class="img-thumbnail">
+        <div class="h5 character-name">ジョチ</div>
+        <div class="character-desc">
+          内務省・特務調査課 調査官
+        </div>
+      </div>
+      <!--
+      <div class="separator-for-col-sm-4"></div>
+      <div class="character-container col-sm-3 container center-block text-center">
+        <div class="h5 character-name">ミルカさん</div>
+        <div class="character-desc">
+          「僕」のクラスメート。長い黒髪にメタルフレームの眼鏡を掛けている。数学が得意な饒舌才媛。
+        </div>
+      </div>
+      -->
+      <div class="separator-for-col-sm-6"></div>
+      <div class="separator-for-col-sm-3"></div>
+      <div class="separator-for-col-sm-6"></div>
+      <div class="separator-for-col-sm-4"></div>
+      <div class="separator-for-col-sm-6"></div>
+      <div class="separator-for-col-sm-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- セクション：動画 -->
+
+<section id="music" class="section-dark"><div class="container dd-container"><h2 class="section-title text-center">MUSIC</h2>
+  <p class="h1 text-center section-lead">劇中音楽の紹介</p>
+  一部のビデオは本サイトでは再生できない可能性があります。その場合は、YouTubeのサイト／アプリでご視聴ください。
+    <div class="embed-responsive embed-responsive-16by9"><iframe width="1280" height="720" src="https://www.youtube.com/embed/videoseries?list=PLf_zekypDG5qBT4O0u7pO6N7__F1FPIYw" frameborder="0" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe></div>
+
+  </div></section>
+
+<section id="info" class="section-inverse">
+  <div class="container dd-container">
+    <h2 class="h4 section-title text-center">DETAILS</h2>
+    <p class="h1 text-center section-lead">この本について</p>
+    <table class="table table-condenced">
+      <tr>
+        <th>タイトル</th>
+        <td><%= BOOK_COLLECTION_TITLE %><br><%= BOOK_TITLE %></td>
+      </tr>
+
+      <tr>
+        <th>著者</th>
+        <td>
+          <ul class="list-unstyled">
+            <li><%= AUTHOR %></li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <th>発行日</th>
+        <td><%= PUBLISH_DATE %></td>
+      </tr>
+
+      <tr>
+        <th>発行者</th>
+        <td><%= PUBLISHER %></td>
+      </tr>
+
+      <tr>
+        <th>販売価格</th>
+        <td>
+          <p><%= PRICE_YEN %>円</p>
+          <p><a href="#acquisition" class="btn btn-default btn-sm">この本を入手</a></p>
+        </td>
+      </tr>
+
+      <tr>
+        <th>ISBN</th>
+        <td><%= ISBN %></td>
+      </tr>
+
+    </table>
+  </div>
+</section>
+
+<section id="free-writing" class="section">
+  <div class="container review-container">
+    <h2 class="h4 section-title text-center">REVIEWS</h2>
+    <p class="h1 text-center section-lead">読者の声</p>
+    <div class="free-writing-body-container"><%= FREE_WRITING_HTML %></div>
+  </div>
+</section>
+
+<section id="acquisition" class="section-inverse">
+  <div class="container dd-container">
+    <h2 class="h4 section-title text-center">BUY NOW</h2>
+    <p class="h1 text-center section-lead">ご購入はこちらから</p>
+    <p class="text-center">販売価格<span class="price"><%= PRICE_YEN %></span>円 </p>
+    <p class="text-center small">価格はストアのセールやキャンペーンなどによって変動する場合があります。</p>
+    <hr>
+    <ul class="list-inline text-center">
+      <% SHOPS.each do |shop| %>
+        <li><p><a href="<%= shop[:URL] %>" class="btn btn-primary btn-lg"><%= shop[:NAME] %></a></p></li>
+      <% end %>
+    </ul>
+  </div>
+</section>
+
+<section id="related-contents" title="Related works">
+  <div class="container dd-container">
+    <h2 class="h4 section-title text-center">RELATED WORKS</h2>
+    <p class="h1 text-center section-lead">関連書籍</p>
+    <div class="row">
+      <!--
+      <div class="col-sm-6">
+        <div class="thumbnail text-center"><a href="../analog" title="アナログ鍵の失効リスト" class="target">
+            <div style="background-image: url(../analog/cover.jpg);" class="thumbnail-container"></div></a>
+          <div class="caption"><a href="../distance" class="thumbnail-title">アナログ鍵の失効リスト</a></div>
+        </div>
+      </div>
+      -->
+      <!--
+      <div class="col-sm-6">
+        <div class="thumbnail text-center"><a href="http://note2.textfile.org" title="整数で遊ぼう">
+            <div style="background-image: url(http://static.tumblr.com/191d9cb930cd5dfb1b968a88007039d5/qcurvlw/vMEnwkagz/tumblr_static_3f54xmfztqascwco4cko44k0k.png);" class="thumbnail-container"></div></a>
+          <div class="caption"><a href="http://note2.textfile.org" class="thumbnail-title">整数で遊ぼう</a></div>
+        </div>
+      </div>
+      <div class="works-separator-for-col-sm-6"></div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center"><a href="http://note3.textfile.org" title="丸い三角関数">
+            <div style="background-image: url(http://static.tumblr.com/ee4de34075e2e2a45556570dcbb4a9c6/qcurvlw/RnGnwkah0/tumblr_static_day76otg7ogk88og4cgcgw0s4.png);" class="thumbnail-container"></div></a>
+          <div class="caption"><a href="http://note3.textfile.org" class="thumbnail-title">丸い三角関数</a></div>
+        </div>
+      </div>
+      <div class="works-separator-for-col-sm-4"></div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center"><a href="http://note4.textfile.org" title="数列の広場">
+            <div style="background-image: url(http://static.tumblr.com/a7323614a20b9d0014dcb072ff63802a/qcurvlw/YLAnwkah1/tumblr_static_eni8aaypbugw0kkww08wg0880.png);" class="thumbnail-container"></div></a>
+          <div class="caption"><a href="http://note4.textfile.org" class="thumbnail-title">数列の広場</a></div>
+        </div>
+      </div>
+      <div class="works-separator-for-col-sm-6"></div>
+      <div class="works-separator-for-col-sm-3"></div>
+      <div class="col-sm-6">
+        <div class="thumbnail text-center"><a href="http://note5.textfile.org" title="微分を追いかけて">
+            <div style="background-image: url(http://static.tumblr.com/2c5ff12269222957ff01d35ef91787ae/qcurvlw/DRDnwkah1/tumblr_static_dw09gc4dbp4wkcgoosksgc8wg.png);" class="thumbnail-container"></div></a>
+          <div class="caption"><a href="http://note5.textfile.org" class="thumbnail-title">微分を追いかけて</a></div>
+        </div>
+      </div>
+      <div class="works-separator-for-col-sm-6"></div>
+      <div class="works-separator-for-col-sm-4"></div>
+      -->
+    </div>
+  </div>
+</section>
+
+<hr class="context-break">
+
+<section id="bio">
+  <div class="container dd-container">
+    <h2 class="h4 section-title text-center">CREATED BY</h2>
+    <p class="h1 text-center section-lead">この本を書いた人</p>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <ul class="media-list">
+          <li class="media">
+          <div style="margin-right: 20px;" class="pull-left"><img style="width: 64px;" src="<%= AUTHOR_IMAGE %>" alt="" class="media-object img-circle"></div>
+          <div class="media-body">
+            <div class="media-heading">
+              <span class="role">著者</span>
+              <%= AUTHOR %>
+              <small><%= AUTHOR_YOMI %></small>
+            </div>
+            <ul class="list-inline">
+              <li><a href="<%= AUTHOR_URL %>" title="Web site"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-home fa-stack-1x fa-inverse"></i></span></a></li>
+              <li><a href="<%= TWITTER_URL %>" title="Twitter"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></li>
+            </ul>
+            <div class="author-description"><%= AUTHOR_DESCRIPTION %></div>
+          </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="context-break">
+
+<section id="thanks">
+  <div class="container dd-container">
+    <h2 class="h4 section-title text-center">SPECIAL THANKS</h2>
+    <!--<p class="h1 text-center section-lead">この本を書いた人</p>-->
+    <div class="container dd-container text-center">
+      <%= THANKS_HTML %>
+    </div>
+  </div>
+</section>
+
+<!-- Schema.org JSON-LD -->
+
+<script type="application/ld+json">
+{
+      "@context": "http://schema.org",
+      "@type": "Book",
+      "isbn": "<%= ISBN %>",
+      "bookFormat": "http://schema.org/EBook",
+      "inLanguage": "ja",
+      "datePublished": "<%= PUBLISH_DATE %>",
+      "publisher": {"name": "<%= PUBLISHER %>"},
+      "author": [
+        {
+        "name": "<%= AUTHOR %>",
+        "description": "<%= AUTHOR_DESCRIPTION %>",
+        "image": "<%= AUTHOR_IMAGE %>",
+        "url": "<%= AUTHOR_URL %>"
+        }
+      ],
+      "url": "<%= URL %>",
+      "image": "<%= COVER_IMAGE %>",
+      "description": "<%= DESCRIPTION %>",
+      "name": "<%= TITLE %>"
+      }
+</script>
+
+<footer id="footer">
+  <div class="container dd-container text-center">
+    <div><small><a href="http://lp.denshochan.com/">Theme</a>designed by <a href="http://densho.hatenablog.com/">Densho Channel</a>.</small></div>
+  </div>
+</footer>
+</body>
+</html>
