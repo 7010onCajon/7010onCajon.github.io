@@ -2,7 +2,8 @@
 COLOR_PRIMARY = '#694F94'
 TWITTER = '@7010onCajon'
 TWITTER_URL = 'https://twitter.com/7010onCajon'
-URL = 'https://7010oncajon.github.io/books/qubit'
+URL = 'https://7010oncajon.github.io/books/qubit/index.html'
+OGP_IMAGE = 'https://7010oncajon.github.io/books/qubit/ogp.png'
 TITLE = '少しだけ不自由な私たちの殻'
 BACKGROUND_IMAGE = './background.jpg'
 SHORTCUT_ICON = '../../img/favicon.png'
@@ -87,7 +88,7 @@ SHOPS = [
 <!-- OGP -->
 <meta property="og:title" content="<%= TITLE %> - <%= AUTHOR %> ">
 <meta property="og:type" content="website">
-<meta property="og:image" content="<%= COVER_IMAGE %>">
+<meta property="og:image" content="<%= OGP_IMAGE %>">
 <meta property="og:site_name" content="<%= TITLE %> | <%= AUTHOR %>">
 <meta property="og:description" content="<%= DESCRIPTION %>">
 <meta property="og:url" content="<%= URL %>">
@@ -96,6 +97,9 @@ SHOPS = [
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="<%= TWITTER %>">
 <meta name="twitter:creator" content="<%= TWITTER %>">
+
+<!-- NoteCard -->
+<meta name="note:card" content="summary_large_image">
 
 <style>figure{margin:0}</style>
 
