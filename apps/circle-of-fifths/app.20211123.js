@@ -102,7 +102,8 @@ function initKeys(keys, keyStrings, radius, superCap, color="black", size=16) {
         let k = s.text(CENTER_X, CENTER_Y, key.split(''));
         k.attr({
             textAnchor: "middle",
-            dominantBaseline: "central",
+            //dominantBaseline: "middle",
+            dy: "0.5em",
             letterSpacing: 0,
             fill: color,
             fontSize: size
