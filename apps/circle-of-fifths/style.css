@@ -1,11 +1,11 @@
 .contents {
-    max-width: 640px;
+    max-width: 360px;
     margin: auto;
 }
 .svg-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 100%; /* SVG高さ / SVG幅 * 100 */
+    padding-top: 177.77777%; /* SVG高さ / SVG幅 * 100 */
 }
 .svg-wrapper svg {
     position: absolute;
