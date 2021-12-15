@@ -212,7 +212,7 @@ var diminishes = [];
 initKeys(diminishes, DIMINISH_KEYS, DIMINISH_RADIUS, true, "#6c757d", 12);
 
 // タイトルの表示
-var main = s.text(CENTER_X, 40, "Circle of Fifth for Jazz Player");
+var main = s.text(CENTER_X, 40, "Circle of Fifths for Jazz Player");
 main.attr({
     textAnchor: "middle",
     dominantBaseline: "central",
