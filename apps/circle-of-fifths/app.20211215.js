@@ -285,7 +285,7 @@ function rotateCircle(isFlat) {
     let animation = Snap.matrix();
     if(isFlat == false){
         // 右回りの時
-        animation.rotate((360 / 12) * currentKey - DELTA, CENTER_X, CENTER_Y); 
+        animation.rotate((360 / 12) * currentKey - DELTA, CENTER_X, CENTER_Y);    
     }else{
         // 左回りの時
         animation.rotate((360 / 12) * currentKey, CENTER_X, CENTER_Y);
@@ -296,10 +296,10 @@ function rotateCircle(isFlat) {
         group.transform(matrix);
         if(isFlat == true && matrix.split().rotate == -90){
             // 左回りの時 かつ -90°に達した時に事前調整を行う
-            // console.log("NG");
+            console.log("NG");
             let temp = Snap.matrix().rotate(270 - DELTA, CENTER_X, CENTER_Y)
             group.transform(temp);
-            // console.log(temp.split().rotate);
+            console.log(temp.split().rotate);
         }
     });
 }
@@ -507,44 +507,6 @@ const SUB_DOMINANT = "#c3e6cb";
 //const DOMINANT = "#ffeeba"
 const DOMINANT = "#f5c6cb"
 
-const DIATONIC_NOTICE_X = CENTER_X - 60;
-const DIATONIC_NOTICE_Y = 580;
-var diatonicNotice = s.group();
-//
-diatonicNotice.circle(DIATONIC_NOTICE_X, DIATONIC_NOTICE_Y, 10)
-    .attr({fill: TONIC })
-    .transform((Snap.matrix().translate(0, 0)));
-diatonicNotice.text(DIATONIC_NOTICE_X, DIATONIC_NOTICE_Y, ": " + "Tonic")
-    .attr({
-        //textAnchor: "middle",
-        dominantBaseline: "central"
-    })
-    .transform((Snap.matrix().translate(20, 0)));
-//
-diatonicNotice.circle(DIATONIC_NOTICE_X, DIATONIC_NOTICE_Y, 10)
-    .attr({fill: SUB_DOMINANT })
-    .transform((Snap.matrix().translate(0, 25)));
-diatonicNotice.text(DIATONIC_NOTICE_X, DIATONIC_NOTICE_Y, ": " + "SubDominat")
-    .attr({
-        //textAnchor: "middle",
-        dominantBaseline: "central"
-    })
-    .transform((Snap.matrix().translate(20, 25)));
-
-//
-//
-diatonicNotice.circle(DIATONIC_NOTICE_X, DIATONIC_NOTICE_Y, 10)
-    .attr({fill: DOMINANT })
-    .transform((Snap.matrix().translate(0, 50)));
-diatonicNotice.text(DIATONIC_NOTICE_X, DIATONIC_NOTICE_Y, ": " + "Dominat")
-    .attr({
-        //textAnchor: "middle",
-        dominantBaseline: "central"
-    })
-    .transform((Snap.matrix().translate(20, 50)));
-
- diatonicNotice.attr({opacity: 0});   
-
 // ダイアトニックボタンのON/off制御
 function activate(rect, text, active) {
     if(active == true){
@@ -578,8 +540,6 @@ majorDiatonicButton.click(function (e) {
     activate(noneDiatonicRect, noneDiatonicText, false);
     activate(minorDiatonicRect, minorDiatonicText, false);
 
-    diatonicNotice.attr({opacity: 1.0});
-
 });
 
 noneDiatonicButton.click(function (e) {
@@ -595,8 +555,6 @@ noneDiatonicButton.click(function (e) {
     activate(majorDiatonicRect, majorDiatonicText, false);
     activate(noneDiatonicRect, noneDiatonicText, true);
     activate(minorDiatonicRect, minorDiatonicText, false);
-
-    diatonicNotice.attr({opacity: 0});
 });
 
 minorDiatonicButton.click(function (e) {
@@ -612,8 +570,6 @@ minorDiatonicButton.click(function (e) {
     activate(majorDiatonicRect, majorDiatonicText, false);
     activate(noneDiatonicRect, noneDiatonicText, false);
     activate(minorDiatonicRect, minorDiatonicText, true);
-
-    diatonicNotice.attr({opacity: 1.0});
 });
 
 // Dragイベント
