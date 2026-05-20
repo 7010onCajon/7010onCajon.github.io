@@ -1,0 +1,17 @@
+{
+  "name": "五度圏 — Circle of Fifths",
+  "short_name": "五度圏",
+  "description": "ポピュラー音楽・Jazzで使う機能だけを、必要な形で。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0e0e0e",
+  "theme_color": "#0e0e0e",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
