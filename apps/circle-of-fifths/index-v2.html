@@ -102,6 +102,7 @@
       border: 1px solid var(--border); border-radius: 6px;
       cursor: pointer; transition: background 0.15s, color 0.15s;
       font-family: Georgia, serif;
+      touch-action: manipulation; /* ダブルタップズームを無効化 */
     }
     .btn-rotate:hover, .btn-rotate:active {
       background: var(--accent); border-color: var(--accent); color: var(--bg);
