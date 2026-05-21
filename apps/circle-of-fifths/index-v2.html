@@ -155,6 +155,19 @@
     .chord-or     { display: block; font-size: 0.46rem; color: var(--text-muted); margin: 0.07rem 0; }
     .tritone-sub  { display: block; font-size: 0.5rem; color: var(--text-muted); margin-top: 0.22rem; }
 
+    /* Toast */
+    .toast {
+      position: fixed; top: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.2rem; border-radius: 4px;
+      font-size: 0.75rem; z-index: 999;
+      opacity: 0; transition: opacity 0.3s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+
     /* Sep / About / Works */
     .sep { border: none; border-top: 1px solid var(--border); margin: 1.75rem 0; }
     .about-text { font-size: 0.85rem; line-height: 1.9; color: var(--text-dim); }
@@ -180,6 +193,8 @@
   </style>
 </head>
 <body>
+
+<div class="toast" id="toast"></div>
 
 <header class="site-header">
   <h1 class="site-title">Circle of Fifths</h1>
@@ -630,6 +645,34 @@
   /* ── Init ───────────────────────────────────────────────────── */
   build();
   applyAngle(0);
+
+  /* ── 自分のアクセス除外トグル（タイトル5連打）────────────────── */
+  (function () {
+    let taps = 0, timer;
+    document.querySelector('.site-title').addEventListener('click', () => {
+      taps++;
+      clearTimeout(timer);
+      timer = setTimeout(() => { taps = 0; }, 1500);
+      if (taps >= 5) {
+        taps = 0;
+        const isExcluded = localStorage.getItem('umami.disabled') === '1';
+        if (isExcluded) {
+          localStorage.removeItem('umami.disabled');
+          showToast('除外を解除しました');
+        } else {
+          localStorage.setItem('umami.disabled', '1');
+          showToast('自分のアクセスを除外しました');
+        }
+      }
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+  })();
 })();
 </script>
 </body>
