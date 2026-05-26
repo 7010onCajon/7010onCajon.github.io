@@ -1,41 +1,679 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <title>Circle of Fifths</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五度圏 — Circle of Fifths</title>
 
-    <!-- fabicon設定-->
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" type="image/png" href="android-touch-icon.png" sizes="192x192">
+  <!-- PWA / Home Screen -->
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" type="image/png" href="icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="五度圏">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.json">
 
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="647ec311-e0b4-4ca9-91cf-5e59b31b5c06"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg: #0e0e0e;
+      --surface: #181818;
+      --border: #252525;
+      --text: #f0ece5;
+      --text-dim: #909090;
+      --text-muted: #505050;
+      --accent: #c4a35a;
+      --tonic: #5b9bd5;
+      --subdom: #5aad6a;
+      --dom: #d06070;
+      --seg-tonic:  rgba(91, 155, 213, 0.55);
+      --seg-subdom: rgba(90, 173, 106, 0.55);
+      --seg-dom:    rgba(208, 96, 112, 0.55);
+      --dim-text: #707070;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8f7f4;
+        --surface: #ffffff;
+        --border: #e0ddd8;
+        --text: #1a1a1a;
+        --text-dim: #707070;
+        --text-muted: #aaaaaa;
+        --accent: #9a7030;
+        --tonic: #1565c0;
+        --subdom: #2e7d32;
+        --dom: #c62828;
+        --seg-tonic:  rgba(21, 101, 192, 0.3);
+        --seg-subdom: rgba(46, 125, 50, 0.3);
+        --seg-dom:    rgba(198, 40, 40, 0.3);
+        --dim-text: #888888;
+      }
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0 1.2rem 4rem;
+    }
+
+    .site-header { padding: 2rem 0 0.5rem; text-align: center; }
+    .site-title {
+      font-size: 0.68rem; font-weight: normal;
+      letter-spacing: 0.3em; color: var(--text-muted); text-transform: uppercase;
+    }
+
+    /* SVG */
+    #circle-wrap { width: 100%; max-width: 480px; margin: 0 auto; }
+    #circle-svg  { width: 100%; height: auto; display: block; }
+
+    /* SVG fill classes */
+    .f-bg       { fill: var(--bg); }
+    .f-text     { fill: var(--text); }
+    .f-dim-text { fill: var(--dim-text); }
+    .f-muted    { fill: var(--text-muted); }
+    .f-ring     { fill: #151515; }
+    .f-seg-maj  { fill: #1e1e1e; }
+    .f-seg-min  { fill: #181818; }
+    .f-seg-dim  { fill: #141414; }
+    @media (prefers-color-scheme: light) {
+      .f-ring    { fill: #e8e4dc; }
+      .f-seg-maj { fill: #e4e0d8; }
+      .f-seg-min { fill: #ece9e2; }
+      .f-seg-dim { fill: #f0ede8; }
+    }
+
+    /* Rotate buttons */
+    .btn-row {
+      display: flex; gap: 0.75rem;
+      justify-content: center; padding: 0.6rem 0 0.4rem;
+    }
+    .btn-rotate {
+      flex: 1; max-width: 160px;
+      padding: 0.4rem 0; font-size: 1.5rem;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border); border-radius: 6px;
+      cursor: pointer; transition: background 0.15s, color 0.15s;
+      font-family: Georgia, serif;
+      touch-action: manipulation; /* ダブルタップズームを無効化 */
+    }
+    .btn-rotate:hover, .btn-rotate:active {
+      background: var(--accent); border-color: var(--accent); color: var(--bg);
+    }
+
+    /* Mode selector */
+    .mode-row { display: flex; justify-content: center; margin: 0.25rem 0 0.4rem; }
+    .mode-btn {
+      flex: 1; max-width: 110px; padding: 0.45rem 0;
+      font-size: 0.78rem; font-family: Georgia, serif;
+      background: var(--surface); color: var(--text-dim);
+      border: 1px solid var(--border); cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .mode-btn:first-child { border-radius: 4px 0 0 4px; }
+    .mode-btn:last-child  { border-radius: 0 4px 4px 0; }
+    .mode-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+    /* Legend */
+    .legend {
+      display: none; justify-content: center;
+      gap: 1.2rem; padding: 0.1rem 0 0.4rem;
+      font-size: 0.7rem; color: var(--text-dim);
+    }
+    .legend.visible { display: flex; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 0.35rem; }
+    .legend-dot  { width: 18px; height: 10px; border-radius: 2px; display: inline-block; }
+
+    /* Diatonic section */
+    #diatonic-section { display: none; padding: 0.4rem 0 0.8rem; }
+    #diatonic-section.visible { display: block; }
+    .diatonic-header { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.6rem; }
+    .diatonic-eyebrow { font-size: 0.62rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; }
+    .diatonic-key { font-size: 1.05rem; color: var(--accent); }
+
+    .chord-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0.3rem;
+    }
+    @media (max-width: 460px) { .chord-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .chord-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 3px; padding: 0.4rem 0.15rem;
+      text-align: center; display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start; min-height: 52px;
+    }
+    .chord-degree { display: block; font-size: 0.5rem; color: var(--text-muted); letter-spacing: 0.03em; margin-bottom: 0.18rem; }
+    .chord-name   { display: block; font-size: 0.68rem; color: var(--text); line-height: 1.2; }
+    .chord-or     { display: block; font-size: 0.46rem; color: var(--text-muted); margin: 0.07rem 0; }
+    .tritone-sub  { display: block; font-size: 0.5rem; color: var(--text-muted); margin-top: 0.22rem; }
+
+    /* Toast */
+    .toast {
+      position: fixed; top: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.2rem; border-radius: 4px;
+      font-size: 0.75rem; z-index: 999;
+      opacity: 0; transition: opacity 0.3s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+
+    /* Sep / About / Works */
+    .sep { border: none; border-top: 1px solid var(--border); margin: 1.75rem 0; }
+    .about-text { font-size: 0.85rem; line-height: 1.9; color: var(--text-dim); }
+    .about-sig  { margin-top: 1.1rem; font-size: 0.75rem; color: var(--text-muted); }
+    .about-sig a { color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .about-sig a:hover { color: var(--text-dim); }
+    .about-links {
+      display: flex; gap: 1rem; margin-top: 1rem; align-items: center;
+    }
+    .about-links a {
+      color: var(--text-muted); text-decoration: none;
+      transition: color 0.15s; display: flex; align-items: center;
+    }
+    .about-links a:hover { color: var(--accent); }
+    .about-links svg { width: 20px; height: 20px; }
+
+    .works-eyebrow { font-size: 0.62rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.9rem; }
+    .work-link     { display: block; text-decoration: none; color: inherit; }
+    .work-thumb    { width: 100%; max-height: 130px; object-fit: cover; border-radius: 3px; margin-bottom: 0.5rem; display: block; }
+    .work-title    { font-size: 0.9rem; color: var(--text); margin-bottom: 0.3rem; transition: color 0.15s; }
+    .work-link:hover .work-title { color: var(--accent); }
+    .work-tagline  { font-size: 0.75rem; color: var(--text-dim); }
+  </style>
 </head>
-
 <body>
-    
-    <div class="contents">
-        <div class="svg-wrapper">
-            <svg id="svg" viewbox="0 0 360 640" width="360" height="640"></svg>
-        </div>
-        <div align="center" style="margin : 10px">
-            <span style="font-size : x-small">
-                Created by <a href="https://7010oncajon.github.io/">7010onCajon</a>    
-            </span>
-        </div>
-    </div>
 
-    <!-- SVGライブラリ -->
-    <script src="snap.svg-min.js"></script>
-    <!--
-    <script src="snap.svg-dev.js"></script>
-    -->
-    <!-- 描画スクリプト -->
-    <script src="app.js"></script>
+<div class="toast" id="toast"></div>
+
+<header class="site-header">
+  <h1 class="site-title">Circle of Fifths</h1>
+</header>
+
+<div id="circle-wrap">
+  <svg id="circle-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-label="五度圏"></svg>
+</div>
+
+<div class="btn-row">
+  <button class="btn-rotate" id="btn-flat">♭</button>
+  <button class="btn-rotate" id="btn-sharp">♯</button>
+</div>
+
+<div class="mode-row">
+  <button class="mode-btn" data-mode="minor">minor</button>
+  <button class="mode-btn active" data-mode="none">(none)</button>
+  <button class="mode-btn" data-mode="major">MAJOR</button>
+</div>
+
+<div class="legend" id="legend">
+  <span class="legend-item"><span class="legend-dot" id="dot-t"></span> Tonic</span>
+  <span class="legend-item"><span class="legend-dot" id="dot-s"></span> SubDominant</span>
+  <span class="legend-item"><span class="legend-dot" id="dot-d"></span> Dominant</span>
+</div>
+
+<section id="diatonic-section" aria-live="polite">
+  <div class="diatonic-header">
+    <span class="diatonic-eyebrow">Key</span>
+    <span class="diatonic-key" id="diatonic-key-name"></span>
+  </div>
+  <div class="chord-grid" id="chord-grid"></div>
+</section>
+
+<hr class="sep">
+
+<section class="about-section">
+  <p class="about-text">
+    フラット側が時計回り。ドミナント進行の方向に回る五度圏。<br>
+    ポピュラー音楽家・ジャズミュージシャンが好んで使う機能だけを、必要な形で。
+  </p>
+  <p class="about-sig">— 凪野 朔</p>
+  <div class="about-links">
+    <!-- Portfolio -->
+    <a href="https://7010oncajon.github.io/" target="_blank" rel="noopener noreferrer" title="Portfolio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+    </a>
+    <!-- note -->
+    <a href="https://note.com/7010oncajon" target="_blank" rel="noopener noreferrer" title="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+    </a>
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@SceneThePoeticalPrivate" target="_blank" rel="noopener noreferrer" title="YouTube">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+      </svg>
+    </a>
+    <!-- Kindle -->
+    <a href="https://www.amazon.co.jp/stores/7010onCajon/author/B08FJ34YZV" target="_blank" rel="noopener noreferrer" title="Kindle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="works-section">
+  <p class="works-eyebrow">Works</p>
+  <div id="works-container"></div>
+</section>
+
+<!-- Works data: edit this JSON to add/update works -->
+<script type="application/json" id="works-data">
+{
+  "works": [
+    {
+      "category": "novel",
+      "weight": 2,
+      "title": "紺碧のトライアド",
+      "tagline": "これは私が、私の音を見つけるまでの物語。",
+      "url": "https://7010oncajon.github.io/books/triad/index.html",
+      "thumbnail": ""
+    },
+    {
+      "category": "novel",
+      "weight": 2,
+      "title": "紺碧のトライアド",
+      "tagline": "これは私が、私の音を見つけるまでの物語。",
+      "url": "https://note.com/7010oncajon/n/n906a30fb1a74?sub_rt=share_sb",
+      "thumbnail": ""
+    },
+    {
+      "category": "novel",
+      "weight": 2,
+      "title": "アリアに出でにし",
+      "tagline": "嘘をつけない楽器が暴いたのは、17歳の私が隠した『2つの恋心』でした。",
+      "url": "https://note.com/7010oncajon/n/naadcda4d3e8b?sub_rt=share_pw",
+      "thumbnail": ""
+    },
+    {
+      "category": "diorama",
+      "weight": 1,
+      "title": "君はそこにいて、僕はここで立ち止まる",
+      "tagline": "ほら、早くおいでよ",
+      "url": "https://note.com/7010oncajon/n/n7f8feac09531?sub_rt=share_pw",
+      "thumbnail": ""
+    },
+    {
+      "category": "essay",
+      "weight": 1,
+      "title": "僕が考える最強の五度圏アプリ",
+      "tagline": "この五度圏アプリの制作ブログ",
+      "url": "https://note.com/7010oncajon/n/ne55a1a3808cf?sub_rt=share_sb",
+      "thumbnail": ""
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  'use strict';
+  const NS = 'http://www.w3.org/2000/svg';
+  const CX = 250, CY = 250;
+
+  /* ── Ring geometry ──────────────────────────────────────────── */
+  const R = {
+    ks:  { o: 222, i: 200 },  // text-only (no segments)
+    maj: { o: 195, i: 152 },
+    min: { o: 147, i: 110 },
+    dim: { o: 105, i:  78 },
+  };
+  const midR = k => (R[k].o + R[k].i) / 2;
+
+  /* ── Music data ─────────────────────────────────────────────── */
+  const KEY_SIGS = ['♮','♭1','♭2','♭3','♭4','♭5','♭6','♯5','♯4','♯3','♯2','♯1'];
+  const MAJORS   = ['C','F','B♭','E♭','A♭','D♭','G♭','B','E','A','D','G'];
+  const MINORS_R = ['A','D','G','C','F','B♭','E♭','G♯','C♯','F♯','B','E'];
+  const DIMS     = ['B','E','A','D','G','C','F','A♯','D♯','G♯','C♯','F♯'];
+
+  const DEG_MAJ = ['Ⅰ','Ⅱm','Ⅲm','Ⅳ','Ⅴ7','Ⅵm','Ⅶø'];
+  const DEG_MIN = ['Ⅰm','Ⅱø','♭Ⅲ','Ⅳm','Ⅴ7','♭Ⅵ','♭Ⅶ'];
+
+  const DMAJ = {
+    'C':  { c:[['C△7','C6'],'Dm7','Em7','F△7','G7','Am7','Bø'],   t:'D♭7' },
+    'F':  { c:[['F△7','F6'],'Gm7','Am7','B♭△7','C7','Dm7','Eø'],  t:'G♭7' },
+    'B♭': { c:[['B♭△7','B♭6'],'Cm7','Dm7','E♭△7','F7','Gm7','Aø'],t:'B7'  },
+    'E♭': { c:[['E♭△7','E♭6'],'Fm7','Gm7','A♭△7','B♭7','Cm7','Dø'],t:'E7' },
+    'A♭': { c:[['A♭△7','A♭6'],'B♭m7','Cm7','D♭△7','E♭7','Fm7','Gø'],t:'A7' },
+    'D♭': { c:[['D♭△7','D♭6'],'E♭m7','Fm7','G♭△7','A♭7','B♭m7','Cø'],t:'D7' },
+    'G♭': { c:[['G♭△7','G♭6'],'A♭m7','B♭m7','C♭△7','D♭7','E♭m7','Fø'],t:'G7' },
+    'B':  { c:[['B△7','B6'],'C♯m7','D♯m7','E△7','F♯7','G♯m7','A♯ø'],t:'C7' },
+    'E':  { c:[['E△7','E6'],'F♯m7','G♯m7','A△7','B7','C♯m7','D♯ø'],t:'F7'  },
+    'A':  { c:[['A△7','A6'],'Bm7','C♯m7','D△7','E7','F♯m7','G♯ø'],t:'B♭7' },
+    'D':  { c:[['D△7','D6'],'Em7','F♯m7','G△7','A7','Bm7','C♯ø'],t:'E♭7'  },
+    'G':  { c:[['G△7','G6'],'Am7','Bm7','C△7','D7','Em7','F♯ø'],t:'A♭7'   },
+  };
+
+  const DMIN = {
+    'A':  { c:['Am6','Bø','C△7','Dm7','E7',['F△7','F♯ø'],['G7','G♯ø']],   t:'B♭7' },
+    'D':  { c:['Dm6','Eø','F△7','Gm7','A7',['B♭△7','Bø'],['C7','C♯ø']],   t:'E♭7' },
+    'G':  { c:['Gm6','Aø','B♭△7','Cm7','D7',['E♭△7','Eø'],['F7','F♯ø']],  t:'A♭7' },
+    'C':  { c:['Cm6','Dø','E♭△7','Fm7','G7',['A♭△7','Aø'],['B♭7','Bø']],  t:'D♭7' },
+    'F':  { c:['Fm6','Gø','A♭△7','B♭m7','C7',['D♭△7','Dø'],['E♭7','Eø']], t:'G♭7' },
+    'B♭': { c:['B♭m6','Cø','D♭△7','E♭m7','F7',['G♭△7','Gø'],['A♭7','Aø']],t:'B7'  },
+    'E♭': { c:['E♭m6','Fø','G♭△7','A♭m7','B♭7',['B△7','Cø'],['D♭7','Dø']],t:'E7'  },
+    'G♯': { c:['G♯m6','A♯ø','B△7','C♯m7','D♯7',['E△7','Fø'],['F♯7','Gø']],t:'A7'  },
+    'C♯': { c:['C♯m6','D♯ø','E△7','F♯m7','G♯7',['A△7','B♭ø'],['B7','Cø']], t:'D7' },
+    'F♯': { c:['F♯m6','G♯ø','A△7','Bm7','C♯7',['D△7','D♯ø'],['E7','Fø']],  t:'G7' },
+    'B':  { c:['Bm6','C♯ø','D△7','Em7','F♯7',['G△7','G♯ø'],['A7','B♭ø']],  t:'C7' },
+    'E':  { c:['Em6','F♯ø','G△7','Am7','B7',['C△7','C♯ø'],['D7','D♯ø']],   t:'F7' },
+  };
+
+  /* ── State ──────────────────────────────────────────────────── */
+  let totalSteps = 0;
+  let animAngle  = 0;
+  let animFrame  = null;
+  let mode = 'none';
+
+  const textRefs = [];                        // { el, x, y }
+  const segs = { maj:[], min:[], dim:[] };    // static segment refs
+
+  /* ── SVG helpers ────────────────────────────────────────────── */
+  function toRad(d) { return d * Math.PI / 180; }
+  function pt(r, deg) { return [CX + r * Math.cos(toRad(deg)), CY + r * Math.sin(toRad(deg))]; }
+
+  function mkEl(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  function arcPath(ro, ri, a0, a1) {
+    const [x0i,y0i] = pt(ri,a0), [x0o,y0o] = pt(ro,a0);
+    const [x1o,y1o] = pt(ro,a1), [x1i,y1i] = pt(ri,a1);
+    const lg = a1 - a0 > 180 ? 1 : 0;
+    return `M${x0i},${y0i}L${x0o},${y0o}A${ro},${ro},0,${lg},1,${x1o},${y1o}L${x1i},${y1i}A${ri},${ri},0,${lg},0,${x0i},${y0i}Z`;
+  }
+
+  function addText(parent, x, y, text, fsize, cls = 'f-text') {
+    const t = mkEl('text', {
+      x, y, 'text-anchor':'middle', 'dominant-baseline':'central',
+      'font-family':'Georgia, serif', 'font-size': fsize,
+      class: cls, 'pointer-events':'none',
+    }, parent);
+    t.textContent = text;
+    textRefs.push({ el: t, x, y });
+    return t;
+  }
+
+  /* ── Build SVG ───────────────────────────────────────────────── */
+  function build() {
+    const svg = document.getElementById('circle-svg');
+    const GAP = 1.8;
+
+    /* Background disc */
+    mkEl('circle', { cx:CX, cy:CY, r:R.ks.o, class:'f-ring' }, svg);
+
+    /* ── Static group: ring segments only ── */
+    const sg = mkEl('g', { id:'sg' }, svg);
+
+    /* ── Rotating group: all text labels ── */
+    const rg = mkEl('g', { id:'rg' }, svg);
+
+    /* Key signature ring: text only (no segments) */
+    const ksMr = midR('ks');
+    for (let n = 0; n < 12; n++) {
+      const center = -90 + n * 30;
+      const [tx, ty] = pt(ksMr, center);
+      const label = KEY_SIGS[n];
+      addText(rg, tx, ty, label, 11, 'f-dim-text');
+    }
+
+    const ringDefs = [
+      { k:'maj', labels:MAJORS,   cls:'f-seg-maj', tcls:'f-text',     fsBase:16 },
+      { k:'min', labels:MINORS_R, cls:'f-seg-min', tcls:'f-text',     fsBase:16 },
+      { k:'dim', labels:DIMS,     cls:'f-seg-dim', tcls:'f-dim-text', fsBase:16 },
+    ];
+
+    for (const rd of ringDefs) {
+      const { o, i } = R[rd.k];
+      const mr = midR(rd.k);
+
+      for (let n = 0; n < 12; n++) {
+        /* Segment center at -90 + n*30; spans ±15° */
+        const center = -90 + n * 30;
+        const a0 = center - 15 + GAP;
+        const a1 = center + 15 - GAP;
+
+        /* Segment goes into static group */
+        const seg = mkEl('path', {
+          d: arcPath(o, i, a0, a1),
+          class: rd.cls,
+          stroke: 'var(--bg)', 'stroke-width':'1.5',
+          'pointer-events':'none',
+        }, sg);
+        segs[rd.k].push(seg);
+
+        /* Text goes into rotating group */
+        const [tx, ty] = pt(mr, center);
+
+        if (rd.k === 'maj' && n === 6) {
+          /* G♭/F♯: G♭ primary (top), F♯ secondary (bottom) */
+          addText(rg, tx, ty - 6, 'G♭', 14, rd.tcls);
+          addText(rg, tx, ty + 8, 'F♯', 10, rd.tcls);
+        } else {
+          const label = rd.labels[n];
+          const hasAcc = label.includes('♭') || label.includes('♯');
+          const fs = hasAcc ? rd.fsBase - 2 : rd.fsBase;
+          addText(rg, tx, ty, label, fs, rd.tcls);
+        }
+      }
+    }
+
+    /* Center disc */
+    mkEl('circle', { cx:CX, cy:CY, r:R.dim.i - 2, class:'f-bg' }, svg);
+  }
+
+  /* ── Rotation animation ──────────────────────────────────────── */
+  function applyAngle(angle) {
+    document.getElementById('rg').setAttribute('transform', `rotate(${angle},${CX},${CY})`);
+    for (const { el, x, y } of textRefs) {
+      el.setAttribute('transform', `rotate(${-angle},${x},${y})`);
+    }
+  }
+
+  function rotateTo(target) {
+    if (animFrame) cancelAnimationFrame(animFrame);
+    const start = animAngle, diff = target - start;
+    if (diff === 0) return;
+    const t0 = performance.now(), dur = 260;
+    function frame(now) {
+      let p = Math.min((now - t0) / dur, 1);
+      p = p < 0.5 ? 2*p*p : -1 + (4 - 2*p)*p;
+      animAngle = start + diff * p;
+      applyAngle(animAngle);
+      if (p < 1) animFrame = requestAnimationFrame(frame);
+      else { animAngle = target; animFrame = null; }
+    }
+    animFrame = requestAnimationFrame(frame);
+  }
+
+  /* ── Key index ──────────────────────────────────────────────── */
+  function curIdx()    { return ((totalSteps % 12) + 12) % 12; }
+  function curMajKey() { return MAJORS[curIdx()]; }
+  function curMinKey() { return MINORS_R[curIdx()]; }
+
+  /* ── Segment coloring ────────────────────────────────────────── */
+  /* Segments are static. n=0 = 12 o'clock, n=1 = 1 o'clock, n=5 = 5 o'clock, n=11 = 11 o'clock.
+     n=5 is always the tritone sub of V7 (= n=11), so it is also Dominant. */
+  const SEG_CLS = { maj:'f-seg-maj', min:'f-seg-min', dim:'f-seg-dim' };
+
+  function updateSegColors() {
+    for (const k of ['maj','min','dim']) {
+      segs[k].forEach(s => { s.removeAttribute('style'); s.setAttribute('class', SEG_CLS[k]); });
+    }
+    if (mode === 'none') return;
+
+    const m = mode === 'major';
+    const T = 'fill: var(--seg-tonic)';
+    const S = 'fill: var(--seg-subdom)';
+    const D = 'fill: var(--seg-dom)';
+
+    segs.maj[0].setAttribute('style', T);         // Ⅰ / ♭Ⅲ
+    segs.maj[1].setAttribute('style', S);          // Ⅳ (MAJOR) / ♭Ⅵ (minor) — 両モードともSubDom
+    segs.maj[5].setAttribute('style', D);          // 裏コード（トライトーン代理）— 両モード共通
+    segs.maj[11].setAttribute('style', D);         // Ⅴ7 / ♭Ⅶ
+    segs.min[0].setAttribute('style', T);          // Ⅵm / Ⅰm
+    segs.min[1].setAttribute('style', S);          // Ⅱm / Ⅳm
+    segs.min[11].setAttribute('style', m ? T : D); // Ⅲm / Ⅴ7
+    segs.dim[0].setAttribute('style', m ? D : S);  // Ⅶø / Ⅱø
+  }
+
+  /* ── Legend ─────────────────────────────────────────────────── */
+  function updateLegend() {
+    const leg = document.getElementById('legend');
+    if (mode === 'none') { leg.classList.remove('visible'); return; }
+    leg.classList.add('visible');
+    document.getElementById('dot-t').style.background = 'var(--seg-tonic)';
+    document.getElementById('dot-s').style.background = 'var(--seg-subdom)';
+    document.getElementById('dot-d').style.background = 'var(--seg-dom)';
+  }
+
+  /* ── Diatonic display ───────────────────────────────────────── */
+  function showDiatonic() {
+    const sec = document.getElementById('diatonic-section');
+    if (mode === 'none') { sec.classList.remove('visible'); return; }
+
+    const isMaj = mode === 'major';
+    const key  = isMaj ? curMajKey() : curMinKey();
+    const data = isMaj ? DMAJ[key]   : DMIN[key];
+    const degs = isMaj ? DEG_MAJ     : DEG_MIN;
+
+    if (!data) { sec.classList.remove('visible'); return; }
+
+    document.getElementById('diatonic-key-name').textContent = isMaj ? key : key + 'm';
+    const grid = document.getElementById('chord-grid');
+    grid.innerHTML = '';
+
+    data.c.forEach((ch, i) => {
+      const card = document.createElement('div');
+      card.className = 'chord-card';
+
+      const deg = document.createElement('span');
+      deg.className = 'chord-degree'; deg.textContent = degs[i];
+      card.appendChild(deg);
+
+      if (Array.isArray(ch)) {
+        const n1 = document.createElement('span'); n1.className = 'chord-name'; n1.textContent = ch[0]; card.appendChild(n1);
+        const or = document.createElement('span'); or.className = 'chord-or';   or.textContent = 'or';   card.appendChild(or);
+        const n2 = document.createElement('span'); n2.className = 'chord-name'; n2.textContent = ch[1]; card.appendChild(n2);
+      } else {
+        const n = document.createElement('span'); n.className = 'chord-name'; n.textContent = ch; card.appendChild(n);
+      }
+
+      if (i === 4 && data.t) {
+        const tri = document.createElement('span'); tri.className = 'tritone-sub'; tri.textContent = '裏: ' + data.t; card.appendChild(tri);
+      }
+      grid.appendChild(card);
+    });
+
+    sec.classList.add('visible');
+    if (typeof umami !== 'undefined') umami.track('key_select', { key: curMajKey(), mode });
+  }
+
+  /* ── Controls ────────────────────────────────────────────────── */
+  function onStep(delta) {
+    totalSteps += delta;
+    rotateTo(-totalSteps * 30);
+    showDiatonic();
+  }
+
+  document.getElementById('btn-flat').addEventListener('click',  () => onStep(+1));
+  document.getElementById('btn-sharp').addEventListener('click', () => onStep(-1));
+
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      mode = btn.dataset.mode;
+      updateSegColors();
+      updateLegend();
+      showDiatonic();
+    });
+  });
+
+  /* ── Works (inline JSON) ────────────────────────────────────── */
+  function pickWork(works) {
+    const tot = works.reduce((s, w) => s + w.weight, 0);
+    let r = Math.random() * tot;
+    for (const w of works) { r -= w.weight; if (r <= 0) return w; }
+    return works[works.length - 1];
+  }
+
+  (function loadWorks() {
+    const raw = document.getElementById('works-data');
+    if (!raw) return;
+    const data = JSON.parse(raw.textContent);
+    const w  = pickWork(data.works);
+    const ct = document.getElementById('works-container');
+    const a  = document.createElement('a');
+    a.href = w.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.className = 'work-link';
+    if (w.thumbnail) {
+      const img = document.createElement('img');
+      img.src = w.thumbnail; img.alt = w.title; img.className = 'work-thumb';
+      img.loading = 'lazy';
+      a.appendChild(img);
+    }
+    const title = document.createElement('p'); title.className = 'work-title'; title.textContent = w.title;
+    const tag   = document.createElement('p'); tag.className   = 'work-tagline'; tag.textContent = w.tagline;
+    a.appendChild(title); a.appendChild(tag);
+    a.addEventListener('click', () => {
+      if (typeof umami !== 'undefined') umami.track('work_click', { title: w.title, category: w.category });
+    });
+    ct.appendChild(a);
+  })();
+
+  /* ── Init ───────────────────────────────────────────────────── */
+  build();
+  applyAngle(0);
+
+  /* ── 自分のアクセス除外トグル（タイトル5連打）────────────────── */
+  (function () {
+    let taps = 0, timer;
+    document.querySelector('.site-title').addEventListener('click', () => {
+      taps++;
+      clearTimeout(timer);
+      timer = setTimeout(() => { taps = 0; }, 1500);
+      if (taps >= 5) {
+        taps = 0;
+        const isExcluded = localStorage.getItem('umami.disabled') === '1';
+        if (isExcluded) {
+          localStorage.removeItem('umami.disabled');
+          showToast('除外を解除しました');
+        } else {
+          localStorage.setItem('umami.disabled', '1');
+          showToast('自分のアクセスを除外しました');
+        }
+      }
+    });
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+  })();
+})();
+</script>
 </body>
-
 </html>
